@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: 100%;
+            height: 550px;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+            flex-wrap: wrap;
+            background-color: #1e293b; 
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        #grid{
+            width: 300px;
+            height: 300px;
+            display: grid;
+            grid-template-rows: 100px 100px 100px;
+            grid-template-columns: 100px 100px 100px;
+            
+        }
+        .items{
+           border: 2px solid #cbdaf1;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+            transition: all;
+            transition-duration: 0.4s;
+            transition-timing-function: ease-in-out;
+        }
+        #item1,#item2,#item3{
+            border-top: none;
+        }
+        #item1,#item4,#item7{
+            border-left: none;
+        }
+        #item3,#item6,#item9{
+            border-right: none;
+        }
+        #item7,#item8,#item9{
+            border-bottom: none;
+        }
+        .items:hover{
+            background-color: #cbdaf1;
+            color: #1e293b;
+        }
+        .btn{
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 100px;
+            height: 50px;
+            background-color: transparent;
+            border: none;
+            font-size: 25px;
+            color: white;
+            transition: all;
+            transition-timing-function: ease-in-out;
+            transition-duration: 0.2s;
+            border : 2px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        #btnx{
+            margin-right: 20px;
+            background-color: #e2e8f0;
+            color: black;
+        }
+        .play{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 22px;
+            margin-top: 20px;
+            width: 160px;
+            height: 45px;
+            display: none;
+            cursor: pointer;
+            transition: all;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-in-out;
+        }
+        .play:hover{
+            width: 200px;
+        }
+        #won{
+            margin-top: 20px;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <button class="btn" id="btnx">X</button>
+    <button class="btn" id="btno">O</button>
+</div>
+    <div id="grid">
+         <div class="items" id="item1"></div>
+         <div class="items" id="item2"></div>
+         <div class="items" id="item3"></div>
+         <div class="items" id="item4"></div>
+         <div class="items" id="item5"></div>
+         <div class="items" id="item6"></div>
+         <div class="items" id="item7"></div>
+         <div class="items" id="item8"></div>
+         <div class="items" id="item9"></div>
+    </div>
+    <p style="font-size: 30px;" id="won"></p>
+    <button class="play">Play Again</button>
+</body>
+<script src="script.js"></script>
+</html>
