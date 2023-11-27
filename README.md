@@ -9,7 +9,7 @@ This is a simple implementation of the classic Tic Tac Toe game in JavaScript. Y
 
 ## Demo
 
-You can try out the game online here  https://itachiuchiha456.github.io/Tic-Tac-Toe/ .
+You can try out the game online here  https://pranav-94.github.io/Tic-Tac-Toe/ .
 
 ## Features
 
