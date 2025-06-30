@@ -16,4 +16,4 @@ You can try out the game online here  https://pranav-94.github.io/Tic-Tac-Toe/ .
 - Simple and intuitive user interface.
 - Responsive design for mobile and desktop.
 - Prevents invalid moves.
-
+- Clean and efficient CSS for a polished look.
