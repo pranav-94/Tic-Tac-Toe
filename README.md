@@ -1,19 +1,38 @@
-# Tic Tac Toe Game
+# Tic-Tac-Toe Game
 
-This is a simple implementation of the classic Tic Tac Toe game in JavaScript. You can play against another player.
+This project implements the classic Tic-Tac-Toe game in JavaScript.  It's a two-player game.
 
 ## Table of Contents
 
 - [Demo](#demo)
 - [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Future Enhancements](#future-enhancements)
+
 
 ## Demo
 
-You can try out the game online here  https://pranav-94.github.io/Tic-Tac-Toe/ .
+[Play the game online](https://pranav-94.github.io/Tic-Tac-Toe/)
+
 
 ## Features
 
-- Simple and intuitive user interface.
-- Responsive design for mobile and desktop.
-- Prevents invalid moves.
+- Clean and intuitive user interface.
+- Responsive design for various screen sizes.
+- Prevents illegal moves (e.g., placing a marker on an occupied square).
+- Clear win/draw conditions.
 
+
+## Technology Stack
+
+- HTML
+- CSS
+- JavaScript
+
+
+## Future Enhancements
+
+- Implement a single-player mode against an AI opponent.
+- Add options for different board sizes.
+- Improve styling and visual appeal.
+- Integrate unit testing.
