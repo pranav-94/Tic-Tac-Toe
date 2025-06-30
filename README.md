@@ -6,6 +6,8 @@ This is a simple implementation of the classic Tic Tac Toe game in JavaScript. Y
 
 - [Demo](#demo)
 - [Features](#features)
+- [Technology Stack](#technology-stack)
+
 
 ## Demo
 
@@ -16,4 +18,10 @@ You can try out the game online here  https://pranav-94.github.io/Tic-Tac-Toe/ .
 - Simple and intuitive user interface.
 - Responsive design for mobile and desktop.
 - Prevents invalid moves.
+- Clear win/draw conditions.
 
+## Technology Stack
+
+- HTML
+- CSS
+- JavaScript
