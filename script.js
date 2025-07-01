@@ -1,232 +1,130 @@
-let x = document.querySelectorAll(".items")
-let btnx = document.querySelector("#btnx")
-let btno = document.querySelector("#btno")
-let temp = 0
-let won = document.querySelector("#won")
-let play = document.querySelector(".play")
+```javascript
+let items = document.querySelectorAll(".items");
+let btnx = document.querySelector("#btnx");
+let btno = document.querySelector("#btno");
+let wonDisplay = document.querySelector("#won");
+let playButton = document.querySelector(".play");
 
-x.forEach(element => {
+let currentPlayer = 'X';
+let gameActive = true;
 
-    element.addEventListener("click",function(){
-    if(temp == 0){
-        element.innerHTML = "X"
-        btnx.style.backgroundColor = "transparent"
-        btno.style.backgroundColor = "#e2e8f0"
-        btno.style.color = "#1e293b"
-        btnx.style.color = "white"
-        // btnx.style.border = "2px solid #e2e8f0"
-        temp = 1
-        Gamelogic()
-        play.addEventListener("click",function(){
-            location.reload()
-        })
-    }
-    else{
-        element.innerHTML = "O"
-        btnx.style.backgroundColor = "#e2e8f0"
-        btno.style.backgroundColor = "transparent"
-        btnx.style.color = "#1e293b"
-        btno.style.color = "white"
-        // btno.style.border = "2px solid #e2e8f0"
-        temp = 0
-        Gamelogic()
-    }
-    })
+// Define winning combinations (indices of the items NodeList)
+const winningCombinations = [
+    [0, 1, 2], // Top row
+    [3, 4, 5], // Middle row
+    [6, 7, 8], // Bottom row
+    [0, 3, 6], // Left column
+    [1, 4, 7], // Middle column
+    [2, 5, 8], // Right column
+    [0, 4, 8], // Diagonal top-left to bottom-right
+    [2, 4, 6]  // Diagonal top-right to bottom-left
+];
 
+// Initial button styles
+updateTurnIndicator();
+
+items.forEach(item => {
+    item.addEventListener("click", handleItemClick);
 });
 
-function Gamelogic(){
-    let item1 = document.querySelector("#item1")
-    let item2 = document.querySelector("#item2")
-    let item3 = document.querySelector("#item3")
-    let item4 = document.querySelector("#item4")
-    let item5 = document.querySelector("#item5")
-    let item6 = document.querySelector("#item6")
-    let item7 = document.querySelector("#item7")
-    let item8 = document.querySelector("#item8")
-    let item9 = document.querySelector("#item9")
+playButton.addEventListener("click", restartGame);
 
-//X portion
-// 3 conditions of item1
-    if(item1.innerText == 'X' && item2.innerText == 'X' && item3.innerText == 'X'){
-       won.innerHTML = "X Won"
-       item1.style.backgroundColor = "#cbdaf1"
-       item2.style.backgroundColor = "#cbdaf1"
-       item3.style.backgroundColor = "#cbdaf1"
-       play.style.display = "block"
-    }
-    if(item1.innerText == 'X' && item4.innerText == 'X' && item7.innerText == 'X'){
-        won.innerHTML = "X Won"
-        item1.style.backgroundColor = "#cbdaf1"
-        item4.style.backgroundColor = "#cbdaf1"
-        item7.style.backgroundColor = "#cbdaf1"
-       play.style.display = "block"
-    }
-     if(item1.innerText == 'X' && item5.innerText == 'X' && item9.innerText == 'X'){
-        won.innerHTML = "X Won"
-        item1.style.backgroundColor = "#cbdaf1"
-        item5.style.backgroundColor = "#cbdaf1"
-        item9.style.backgroundColor = "#cbdaf1"
-       play.style.display = "block"
+function handleItemClick(event) {
+    const clickedItem = event.target;
+
+    // If the item is already filled or the game is not active, do nothing
+    if (clickedItem.innerHTML !== "" || !gameActive) {
+        return;
     }
 
-// 2 Conditions of item2
+    // Place the current player's mark
+    clickedItem.innerHTML = currentPlayer;
 
-    if(item2.innerText == 'X' && item5.innerText == 'X' && item8.innerText == 'X'){
-    won.innerHTML = "X Won"
-       item2.style.backgroundColor = "#cbdaf1"
-       item5.style.backgroundColor = "#cbdaf1"
-       item8.style.backgroundColor = "#cbdaf1"
-            play.style.display = "block"
+    // Check for win or tie
+    if (checkWin()) {
+        endGame(currentPlayer);
+    } else if (checkTie()) {
+        endGame(null); // Pass null for a tie
+    } else {
+        // Switch player and update turn indicator
+        switchPlayer();
+        updateTurnIndicator();
     }
-    // One condition is common
+}
 
-// 3 conditions of item3
-    if(item3.innerText == 'X' && item6.innerText == 'X' && item9.innerText == 'X'){
-    won.innerHTML = "X Won"
-       item3.style.backgroundColor = "#cbdaf1"
-       item6.style.backgroundColor = "#cbdaf1"
-       item9.style.backgroundColor = "#cbdaf1"
-            play.style.display = "block"
+function switchPlayer() {
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+}
+
+function updateTurnIndicator() {
+    if (currentPlayer === 'X') {
+        btnx.style.backgroundColor = "#e2e8f0";
+        btnx.style.color = "#1e293b";
+        btno.style.backgroundColor = "transparent";
+        btno.style.color = "white";
+    } else {
+        btno.style.backgroundColor = "#e2e8f0";
+        btno.style.color = "#1e293b";
+        btnx.style.backgroundColor = "transparent";
+        btnx.style.color = "white";
     }
-    if(item3.innerText == 'X' && item5.innerText == 'X' && item7.innerText == 'X'){
-        won.innerHTML = "X Won"
-        item3.style.backgroundColor = "#cbdaf1"
-        item5.style.backgroundColor = "#cbdaf1"
-        item7.style.backgroundColor = "#cbdaf1"
-       play.style.display = "block"
-    }
-    //One condition is common
+}
 
+function checkWin() {
+    for (const combination of winningCombinations) {
+        const [a, b, c] = combination;
+        const itemA = items[a];
+        const itemB = items[b];
+        const itemC = items[c];
 
-// Conditions of 2nd row
-    if(item4.innerText == 'X' && item5.innerText == 'X' && item6.innerText == 'X'){
-        won.innerHTML = "X Won"
-        item4.style.backgroundColor = "#cbdaf1"
-        item5.style.backgroundColor = "#cbdaf1"
-        item6.style.backgroundColor = "#cbdaf1"
-       play.style.display = "block"
-    }
-
-// item5's conditions are common in others
-// item6's conditions are common in others
-
-   if(item7.innerText == 'X' && item8.innerText == 'X' && item9.innerText == 'X'){
-    won.innerHTML = "X Won"
-       item7.style.backgroundColor = "#cbdaf1"
-       item8.style.backgroundColor = "#cbdaf1"
-       item9.style.backgroundColor = "#cbdaf1"
-            play.style.display = "block"
-   }
-// Remaining item's conditions are common in others
-
-
-
-//O portion
-if(item1.innerText == 'O' && item2.innerText == 'O' && item3.innerText == 'O'){
-    won.innerHTML = "O Won"
-    item1.style.backgroundColor = "#cbdaf1"
-       item2.style.backgroundColor = "#cbdaf1"
-       item3.style.backgroundColor = "#cbdaf1"
-       play.style.display = "block"
- }
- if(item1.innerText == 'O' && item4.innerText == 'O' && item7.innerText == 'O'){
-     won.innerHTML = "O Won"
-     item1.style.backgroundColor = "#cbdaf1"
-       item4.style.backgroundColor = "#cbdaf1"
-       item7.style.backgroundColor = "#cbdaf1"
-
-play.style.display = "block"    }
-  if(item1.innerText == 'O' && item5.innerText == 'O' && item9.innerText == 'O'){
-     won.innerHTML = "O Won"
-     item1.style.backgroundColor = "#cbdaf1"
-       item5.style.backgroundColor = "#cbdaf1"
-       item9.style.backgroundColor = "#cbdaf1"
-
-play.style.display = "block"    }
-
-// 2 Conditions of item2
-
- if(item2.innerText == 'O' && item5.innerText == 'O' && item8.innerText == 'O'){
- won.innerHTML = "O Won"
- item2.style.backgroundColor = "#cbdaf1"
-       item5.style.backgroundColor = "#cbdaf1"
-       item8.style.backgroundColor = "#cbdaf1"
-       play.style.display = "block"
- }
- // One condition is common
-
-// 3 conditions of item3
-if(item3.innerText == 'O' && item6.innerText == 'O' && item9.innerText == 'O'){
-    won.innerHTML = "O Won"
-    item3.style.backgroundColor = "#cbdaf1"
-       item6.style.backgroundColor = "#cbdaf1"
-       item9.style.backgroundColor = "#cbdaf1"
-       play.style.display = "block"
-    }
-    if(item3.innerText == 'O' && item5.innerText == 'O' && item7.innerText == 'O'){
-        won.innerHTML = "O Won"
-        item3.style.backgroundColor = "#cbdaf1"
-       item5.style.backgroundColor = "#cbdaf1"
-       item7.style.backgroundColor = "#cbdaf1"
-   
-   play.style.display = "block" }
-    //One condition is common
-   
-   
-   // Conditions of 2nd row
-    if(item4.innerText == 'O' && item5.innerText == 'O' && item6.innerText == 'O'){
-        won.innerHTML = "O Won"
-        item4.style.backgroundColor = "#cbdaf1"
-       item5.style.backgroundColor = "#cbdaf1"
-       item6.style.backgroundColor = "#cbdaf1"
-   
-   play.style.display = "block" }
-   
-   // item5's conditions are common in others
-   // item6's conditions are common in others
-   
-   if(item7.innerText == 'O' && item8.innerText == 'O' && item9.innerText == 'O'){
-    won.innerHTML = "O Won"
-    item7.style.backgroundColor = "#cbdaf1"
-       item8.style.backgroundColor = "#cbdaf1"
-       item9.style.backgroundColor = "#cbdaf1"
-       play.style.display = "block"
-   }
-
-   if(won.innerHTML == "X Won"){
-        x.forEach(element => {
-            if(element.innerHTML == "")
-            {
-                element.addEventListener("click",function(){
-                    element.innerHTML = ""
-                    btnx.style.backgroundColor = "transparent"
-                    btno.style.backgroundColor = "#e2e8f0"
-                    btno.style.color = "#1e293b"
-                    btnx.style.color = "white"
-                    location.reload()
-                })
-            }
-        });
-   }
-
-   if(won.innerHTML == "O Won"){
-    x.forEach(element => {
-        if(element.innerHTML == "")
-        {
-            element.addEventListener("click",function(){
-                element.innerHTML = ""
-                btnx.style.backgroundColor = "#e2e8f0"
-                btno.style.backgroundColor = "transparent"
-                btnx.style.color = "#1e293b"
-                btno.style.color = "white"
-                location.reload()
-            })
+        // Check if the cells are not empty and have the same content
+        if (itemA.innerHTML !== "" && itemA.innerHTML === itemB.innerHTML && itemA.innerHTML === itemC.innerHTML) {
+            // Highlight winning cells
+            itemA.style.backgroundColor = "#cbdaf1";
+            itemB.style.backgroundColor = "#cbdaf1";
+            itemC.style.backgroundColor = "#cbdaf1";
+            return true; // Found a winner
         }
+    }
+    return false; // No winner yet
+}
+
+function checkTie() {
+    // Check if all cells are filled
+    return Array.from(items).every(item => item.innerHTML !== "");
+}
+
+function endGame(winner) {
+    gameActive = false; // Stop the game
+
+    if (winner) {
+        wonDisplay.innerHTML = `${winner} Won`;
+    } else {
+        wonDisplay.innerHTML = "It's a Tie!";
+    }
+
+    playButton.style.display = "block"; // Show restart button
+
+    // Optionally, disable clicks on all cells explicitly (though gameActive check handles this)
+    // items.forEach(item => item.removeEventListener("click", handleItemClick)); // Or similar
+}
+
+function restartGame() {
+    // Reset game state
+    currentPlayer = 'X';
+    gameActive = true;
+    wonDisplay.innerHTML = ""; // Clear winner message
+    playButton.style.display = "none"; // Hide restart button
+
+    // Clear board and reset styles
+    items.forEach(item => {
+        item.innerHTML = "";
+        item.style.backgroundColor = ""; // Reset background color
     });
+
+    // Reset turn indicator
+    updateTurnIndicator();
+
+    // Ensure event listeners are still active (they are, as we didn't remove them)
 }
-}
-
-
-
-
+```
