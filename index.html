@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,28 +10,41 @@
         *{
             margin: 0;
             padding: 0;
+            box-sizing: border-box; /* Added for better box model handling */
         }
         body{
             width: 100%;
-            height: 550px;
+            min-height: 100vh; /* Use min-height for better responsiveness */
             display: flex;
             flex-direction: column;
-            /* justify-content: center; */
+            /* justify-content: center; */ /* Uncomment if vertical centering is desired */
             align-items: center;
-            flex-wrap: wrap;
-            background-color: #1e293b; 
+            /* flex-wrap: wrap; */ /* Removed as column layout doesn't typically wrap this way */
+            background-color: #1e293b;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding: 20px; /* Add some padding */
+        }
+        main { /* Added main element for semantic structure */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px; /* Limit max width for better layout on large screens */
+        }
+        .player-choice { /* Group player choice buttons */
+            margin-bottom: 30px;
         }
         #grid{
             width: 300px;
             height: 300px;
             display: grid;
-            grid-template-rows: 100px 100px 100px;
-            grid-template-columns: 100px 100px 100px;
-            
+            grid-template-rows: repeat(3, 1fr); /* Use repeat and fr units for flexibility */
+            grid-template-columns: repeat(3, 1fr); /* Use repeat and fr units for flexibility */
+            border: 2px solid #cbdaf1; /* Add a border around the grid */
         }
         .items{
-           border: 2px solid #cbdaf1;
+           /* border: 2px solid #cbdaf1; */ /* Removed individual borders */
+            border: 1px solid #cbdaf1; /* Use 1px border for grid lines */
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -38,40 +52,31 @@
             font-size: 50px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color: white;
-            transition: all;
-            transition-duration: 0.4s;
-            transition-timing-function: ease-in-out;
+            transition: all 0.4s ease-in-out; /* Combined transition properties */
         }
-        #item1,#item2,#item3{
-            border-top: none;
-        }
-        #item1,#item4,#item7{
-            border-left: none;
-        }
-        #item3,#item6,#item9{
-            border-right: none;
-        }
-        #item7,#item8,#item9{
-            border-bottom: none;
-        }
+        /* Removed specific border styles for items, grid border handles it */
+        /* #item1,#item2,#item3{ border-top: none; } */
+        /* #item1,#item4,#item7{ border-left: none; } */
+        /* #item3,#item6,#item9{ border-right: none; } */
+        /* #item7,#item8,#item9{ border-bottom: none; } */
+
         .items:hover{
             background-color: #cbdaf1;
             color: #1e293b;
         }
         .btn{
-            margin-top: 30px;
-            margin-bottom: 30px;
+            margin-top: 30px; /* Adjusted margin */
+            margin-bottom: 30px; /* Adjusted margin */
             width: 100px;
             height: 50px;
             background-color: transparent;
             border: none;
             font-size: 25px;
             color: white;
-            transition: all;
-            transition-timing-function: ease-in-out;
-            transition-duration: 0.2s;
+            transition: all 0.2s ease-in-out; /* Combined transition properties */
             border : 2px solid #e2e8f0;
             border-radius: 8px;
+            cursor: pointer; /* Added cursor pointer */
         }
         #btnx{
             margin-right: 20px;
@@ -84,11 +89,13 @@
             margin-top: 20px;
             width: 160px;
             height: 45px;
-            display: none;
+            display: none; /* Initially hidden */
             cursor: pointer;
-            transition: all;
-            transition-duration: 0.3s;
-            transition-timing-function: ease-in-out;
+            transition: all 0.3s ease-in-out; /* Combined transition properties */
+            background-color: #e2e8f0; /* Added background */
+            color: #1e293b; /* Added text color */
+            border: none; /* Removed default border */
+            border-radius: 8px; /* Added border radius */
         }
         .play:hover{
             width: 200px;
@@ -96,39 +103,55 @@
         #won{
             margin-top: 20px;
             color: #ffffff;
+            font-size: 30px; /* Moved font-size from inline style */
+            text-align: center; /* Center text */
+            min-height: 1.2em; /* Reserve space to prevent layout shifts */
         }
          @media all and (max-width: 600px){
             body{
-                width: 100%;
-                height: 1000px;
-                display: flex;
-                align-items: center;
+                /* height: 1000px; */ /* Removed fixed height */
+                padding: 10px; /* Adjust padding */
+            }
+            main {
+                 max-width: 95%; /* Adjust max width for smaller screens */
             }
             #grid{
                 margin-top: 20px;
                 margin-bottom: 30px;
+                width: 95vw; /* Use viewport units */
+                height: 95vw; /* Use viewport units to keep it square */
+                max-width: 300px; /* Maintain max size */
+                max-height: 300px; /* Maintain max size */
+            }
+            .items {
+                font-size: 15vw; /* Adjust font size based on viewport width */
+                max-font-size: 50px; /* Limit max font size */
             }
         }
     </style>
 </head>
 <body>
-<div>
-    <button class="btn" id="btnx">X</button>
-    <button class="btn" id="btno">O</button>
-</div>
-    <div id="grid">
-         <div class="items" id="item1"></div>
-         <div class="items" id="item2"></div>
-         <div class="items" id="item3"></div>
-         <div class="items" id="item4"></div>
-         <div class="items" id="item5"></div>
-         <div class="items" id="item6"></div>
-         <div class="items" id="item7"></div>
-         <div class="items" id="item8"></div>
-         <div class="items" id="item9"></div>
-    </div>
-    <p style="font-size: 30px;" id="won"></p>
-    <button class="play">Play Again</button>
+    <main> <!-- Added main element -->
+        <div class="player-choice"> <!-- Grouped buttons -->
+            <button class="btn" id="btnx">X</button>
+            <button class="btn" id="btno">O</button>
+        </div>
+        <div id="grid">
+             <!-- Added data-cell-index for easier JavaScript logic -->
+             <div class="items" id="item1" data-cell-index="0"></div>
+             <div class="items" id="item2" data-cell-index="1"></div>
+             <div class="items" id="item3" data-cell-index="2"></div>
+             <div class="items" id="item4" data-cell-index="3"></div>
+             <div class="items" id="item5" data-cell-index="4"></div>
+             <div class="items" id="item6" data-cell-index="5"></div>
+             <div class="items" id="item7" data-cell-index="6"></div>
+             <div class="items" id="item8" data-cell-index="7"></div>
+             <div class="items" id="item9" data-cell-index="8"></div>
+        </div>
+        <p id="won"></p> <!-- Removed inline style -->
+        <button class="play">Play Again</button>
+    </main>
 </body>
 <script src="script.js"></script>
 </html>
+```
