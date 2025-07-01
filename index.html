@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,7 @@
             /* justify-content: center; */
             align-items: center;
             flex-wrap: wrap;
-            background-color: #1e293b; 
+            background-color: #1e293b;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
         #grid{
@@ -27,7 +28,7 @@
             display: grid;
             grid-template-rows: 100px 100px 100px;
             grid-template-columns: 100px 100px 100px;
-            
+
         }
         .items{
            border: 2px solid #cbdaf1;
@@ -42,16 +43,21 @@
             transition-duration: 0.4s;
             transition-timing-function: ease-in-out;
         }
-        #item1,#item2,#item3{
+        /* Remove specific borders for grid edges */
+        /* Top row */
+        #item1, #item2, #item3 {
             border-top: none;
         }
-        #item1,#item4,#item7{
+        /* Left column */
+        #item1, #item4, #item7 {
             border-left: none;
         }
-        #item3,#item6,#item9{
+        /* Right column */
+        #item3, #item6, #item9 {
             border-right: none;
         }
-        #item7,#item8,#item9{
+        /* Bottom row */
+        #item7, #item8, #item9 {
             border-bottom: none;
         }
         .items:hover{
@@ -72,6 +78,7 @@
             transition-duration: 0.2s;
             border : 2px solid #e2e8f0;
             border-radius: 8px;
+            cursor: pointer; /* Added cursor pointer */
         }
         #btnx{
             margin-right: 20px;
@@ -89,6 +96,10 @@
             transition: all;
             transition-duration: 0.3s;
             transition-timing-function: ease-in-out;
+            background-color: #e2e8f0; /* Added background */
+            color: black; /* Added text color */
+            border: none; /* Removed default border */
+            border-radius: 8px; /* Added border radius */
         }
         .play:hover{
             width: 200px;
@@ -100,7 +111,7 @@
          @media all and (max-width: 600px){
             body{
                 width: 100%;
-                height: 1000px;
+                height: 1000px; /* Adjusted height for smaller screens */
                 display: flex;
                 align-items: center;
             }
@@ -117,18 +128,20 @@
     <button class="btn" id="btno">O</button>
 </div>
     <div id="grid">
-         <div class="items" id="item1"></div>
-         <div class="items" id="item2"></div>
-         <div class="items" id="item3"></div>
-         <div class="items" id="item4"></div>
-         <div class="items" id="item5"></div>
-         <div class="items" id="item6"></div>
-         <div class="items" id="item7"></div>
-         <div class="items" id="item8"></div>
-         <div class="items" id="item9"></div>
+         <!-- Added data-index attributes to facilitate game logic in JavaScript -->
+         <div class="items" id="item1" data-index="0"></div>
+         <div class="items" id="item2" data-index="1"></div>
+         <div class="items" id="item3" data-index="2"></div>
+         <div class="items" id="item4" data-index="3"></div>
+         <div class="items" id="item5" data-index="4"></div>
+         <div class="items" id="item6" data-index="5"></div>
+         <div class="items" id="item7" data-index="6"></div>
+         <div class="items" id="item8" data-index="7"></div>
+         <div class="items" id="item9" data-index="8"></div>
     </div>
     <p style="font-size: 30px;" id="won"></p>
     <button class="play">Play Again</button>
 </body>
 <script src="script.js"></script>
 </html>
+```
