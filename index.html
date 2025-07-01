@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,28 +10,29 @@
         *{
             margin: 0;
             padding: 0;
+            box-sizing: border-box; /* Added for better box model handling */
         }
         body{
             width: 100%;
-            height: 550px;
+            min-height: 100vh; /* Use min-height for better responsiveness */
             display: flex;
             flex-direction: column;
-            /* justify-content: center; */
             align-items: center;
-            flex-wrap: wrap;
-            background-color: #1e293b; 
+            justify-content: center; /* Center content vertically */
+            background-color: #1e293b;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding: 20px; /* Add some padding */
         }
         #grid{
             width: 300px;
             height: 300px;
             display: grid;
-            grid-template-rows: 100px 100px 100px;
-            grid-template-columns: 100px 100px 100px;
-            
+            grid-template-rows: repeat(3, 1fr); /* Use repeat and fr units for flexibility */
+            grid-template-columns: repeat(3, 1fr); /* Use repeat and fr units for flexibility */
+            border: 2px solid #cbdaf1; /* Add border to grid container */
         }
         .items{
-           border: 2px solid #cbdaf1;
+            border: 2px solid #cbdaf1;
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -38,57 +40,68 @@
             font-size: 50px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color: white;
-            transition: all;
-            transition-duration: 0.4s;
-            transition-timing-function: ease-in-out;
+            transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out; /* Specify properties for transition */
         }
-        #item1,#item2,#item3{
-            border-top: none;
-        }
-        #item1,#item4,#item7{
-            border-left: none;
-        }
-        #item3,#item6,#item9{
-            border-right: none;
-        }
-        #item7,#item8,#item9{
-            border-bottom: none;
-        }
+        /* Remove individual border styles, use grid gap or border on container/items */
+        /* The grid border and item borders handle separation */
+        #grid .items:nth-child(1),
+        #grid .items:nth-child(2),
+        #grid .items:nth-child(3) { border-top: none; }
+        #grid .items:nth-child(1),
+        #grid .items:nth-child(4),
+        #grid .items:nth-child(7) { border-left: none; }
+        #grid .items:nth-child(3),
+        #grid .items:nth-child(6),
+        #grid .items:nth-child(9) { border-right: none; }
+        #grid .items:nth-child(7),
+        #grid .items:nth-child(8),
+        #grid .items:nth-child(9) { border-bottom: none; }
+
+
         .items:hover{
             background-color: #cbdaf1;
             color: #1e293b;
         }
-        .btn{
-            margin-top: 30px;
+        .btn-container { /* Added container for buttons */
             margin-bottom: 30px;
+        }
+        .btn{
             width: 100px;
             height: 50px;
             background-color: transparent;
             border: none;
             font-size: 25px;
             color: white;
-            transition: all;
-            transition-timing-function: ease-in-out;
-            transition-duration: 0.2s;
+            transition: all 0.2s ease-in-out; /* Specify properties for transition */
             border : 2px solid #e2e8f0;
             border-radius: 8px;
+            cursor: pointer; /* Add cursor pointer */
         }
         #btnx{
             margin-right: 20px;
+            /* Initial active state handled by JS */
+        }
+         #btno {
+             /* Initial state */
+         }
+        .btn.active { /* Class to indicate active player choice */
             background-color: #e2e8f0;
             color: black;
         }
+
         .play{
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-size: 22px;
             margin-top: 20px;
             width: 160px;
             height: 45px;
-            display: none;
+            display: none; /* Initially hidden */
             cursor: pointer;
-            transition: all;
-            transition-duration: 0.3s;
-            transition-timing-function: ease-in-out;
+            transition: width 0.3s ease-in-out; /* Specify property for transition */
+            background-color: #e2e8f0; /* Added background */
+            color: #1e293b; /* Added text color */
+            border: none; /* Remove default border */
+            border-radius: 8px; /* Add border radius */
         }
         .play:hover{
             width: 200px;
@@ -96,39 +109,74 @@
         #won{
             margin-top: 20px;
             color: #ffffff;
+            font-size: 30px; /* Moved font-size from inline style */
+            text-align: center; /* Center text */
+            min-height: 1.2em; /* Reserve space to prevent layout shifts */
         }
          @media all and (max-width: 600px){
             body{
-                width: 100%;
-                height: 1000px;
-                display: flex;
-                align-items: center;
+                padding: 10px; /* Adjust padding */
             }
             #grid{
                 margin-top: 20px;
                 margin-bottom: 30px;
+                width: 90vw; /* Make grid responsive */
+                height: 90vw; /* Make grid responsive */
+                max-width: 300px; /* Keep max size */
+                max-height: 300px; /* Keep max size */
             }
+             .items {
+                 font-size: 15vw; /* Make font size responsive */
+                 max-font-size: 50px; /* Keep max font size */
+             }
+             .btn-container {
+                 display: flex; /* Arrange buttons side-by-side */
+                 justify-content: center;
+                 width: 100%;
+                 margin-bottom: 20px;
+             }
+             .btn {
+                 width: 45%; /* Make buttons responsive */
+                 max-width: 100px; /* Keep max width */
+             }
+             #btnx {
+                 margin-right: 10px; /* Adjust margin */
+             }
+             #btno {
+                 margin-left: 10px; /* Adjust margin */
+             }
+             #won {
+                 font-size: 6vw; /* Make font size responsive */
+                 max-font-size: 30px; /* Keep max font size */
+             }
+             .play {
+                 width: 60%; /* Make play button responsive */
+                 max-width: 160px; /* Keep max width */
+                 font-size: 5vw; /* Make font size responsive */
+                 max-font-size: 22px; /* Keep max font size */
+             }
+             .play:hover {
+                 width: 65%; /* Adjust hover width */
+                 max-width: 200px; /* Keep max width */
+             }
         }
     </style>
 </head>
 <body>
-<div>
-    <button class="btn" id="btnx">X</button>
+<div class="btn-container">
+    <button class="btn active" id="btnx">X</button> <!-- Added 'active' class initially -->
     <button class="btn" id="btno">O</button>
 </div>
-    <div id="grid">
-         <div class="items" id="item1"></div>
-         <div class="items" id="item2"></div>
-         <div class="items" id="item3"></div>
-         <div class="items" id="item4"></div>
-         <div class="items" id="item5"></div>
-         <div class="items" id="item6"></div>
-         <div class="items" id="item7"></div>
-         <div class="items" id="item8"></div>
-         <div class="items" id="item9"></div>
+    <div id="grid" role="grid"> <!-- Added ARIA role -->
+         <div class="items" id="item1" data-index="0" role="gridcell"></div> <!-- Added data-index and ARIA role -->
+         <div class="items" id="item2" data-index="1" role="gridcell"></div> <!-- Added data-index and ARIA role -->
+         <div class="items" id="item3" data-index="2" role="gridcell"></div> <!-- Added data-index and ARIA role -->
+         <div class="items" id="item4" data-index="3" role="gridcell"></div> <!-- Added data-index and ARIA role -->
+         <div class="items" id="item5" data-index="4" role="gridcell"></div> <!-- Added data-index and ARIA role -->
+         <div class="items" id="item6" data-index="5" role="gridcell"></div> <!-- Added data-index and ARIA role -->
+         <div class="items" id="item7" data-index="6" role="gridcell"></div> <!-- Added data-index and ARIA role -->
+         <div class="items" id="item8" data-index="7" role="gridcell"></div> <!-- Added data-index and ARIA role -->
+         <div class="items" id="item9" data-index="8" role="gridcell"></div> <!-- Added data-index and ARIA role -->
     </div>
-    <p style="font-size: 30px;" id="won"></p>
-    <button class="play">Play Again</button>
-</body>
-<script src="script.js"></script>
-</html>
+    <p id="won" aria-live="polite"></p> <!-- Added ARIA live region -->
+    <
