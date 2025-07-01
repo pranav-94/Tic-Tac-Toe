@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,25 +10,28 @@
         *{
             margin: 0;
             padding: 0;
+            box-sizing: border-box; /* Added for better box model handling */
         }
         body{
             width: 100%;
-            height: 550px;
+            min-height: 100vh; /* Use min-height for better responsiveness */
             display: flex;
             flex-direction: column;
-            /* justify-content: center; */
             align-items: center;
+            justify-content: center; /* Center content vertically */
             flex-wrap: wrap;
-            background-color: #1e293b; 
+            background-color: #1e293b;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding: 20px; /* Add some padding */
         }
         #grid{
             width: 300px;
             height: 300px;
             display: grid;
-            grid-template-rows: 100px 100px 100px;
-            grid-template-columns: 100px 100px 100px;
-            
+            grid-template-rows: repeat(3, 1fr); /* Use repeat and 1fr for flexibility */
+            grid-template-columns: repeat(3, 1fr); /* Use repeat and 1fr for flexibility */
+            margin-top: 20px; /* Added margin */
+            margin-bottom: 20px; /* Added margin */
         }
         .items{
            border: 2px solid #cbdaf1;
@@ -38,97 +42,122 @@
             font-size: 50px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color: white;
-            transition: all;
-            transition-duration: 0.4s;
-            transition-timing-function: ease-in-out;
+            transition: all 0.4s ease-in-out; /* Combined transition properties */
         }
-        #item1,#item2,#item3{
-            border-top: none;
-        }
-        #item1,#item4,#item7{
-            border-left: none;
-        }
-        #item3,#item6,#item9{
-            border-right: none;
-        }
-        #item7,#item8,#item9{
-            border-bottom: none;
-        }
+        /* Specific border removal - could be simplified with grid gap or different border strategy */
+        #item1,#item2,#item3{ border-top: none; }
+        #item1,#item4,#item7{ border-left: none; }
+        #item3,#item6,#item9{ border-right: none; }
+        #item7,#item8,#item9{ border-bottom: none; }
+
         .items:hover{
             background-color: #cbdaf1;
             color: #1e293b;
         }
+        .btn-container { /* Added container for buttons */
+            margin-bottom: 20px;
+        }
         .btn{
-            margin-top: 30px;
-            margin-bottom: 30px;
             width: 100px;
             height: 50px;
             background-color: transparent;
             border: none;
             font-size: 25px;
             color: white;
-            transition: all;
-            transition-timing-function: ease-in-out;
-            transition-duration: 0.2s;
+            transition: all 0.2s ease-in-out; /* Combined transition properties */
             border : 2px solid #e2e8f0;
             border-radius: 8px;
+            cursor: pointer; /* Added cursor */
         }
         #btnx{
             margin-right: 20px;
             background-color: #e2e8f0;
             color: black;
         }
+        .game-status { /* Added container for status and play again */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        #won{
+            font-size: 30px; /* Moved inline style to CSS */
+            color: #ffffff;
+            margin-bottom: 20px; /* Added margin below status */
+        }
         .play{
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             font-size: 22px;
-            margin-top: 20px;
             width: 160px;
             height: 45px;
-            display: none;
+            display: none; /* Initially hidden */
             cursor: pointer;
-            transition: all;
-            transition-duration: 0.3s;
-            transition-timing-function: ease-in-out;
+            transition: all 0.3s ease-in-out; /* Combined transition properties */
+            background-color: #e2e8f0; /* Added background */
+            color: #1e293b; /* Added text color */
+            border: none; /* Removed border */
+            border-radius: 8px; /* Added border-radius */
         }
         .play:hover{
             width: 200px;
         }
-        #won{
-            margin-top: 20px;
-            color: #ffffff;
-        }
          @media all and (max-width: 600px){
             body{
-                width: 100%;
-                height: 1000px;
-                display: flex;
-                align-items: center;
+                padding: 10px; /* Adjust padding */
             }
             #grid{
-                margin-top: 20px;
-                margin-bottom: 30px;
+                width: 90vw; /* Use viewport width */
+                height: 90vw; /* Use viewport width to maintain aspect ratio */
+                max-width: 300px; /* Keep max width */
+                max-height: 300px; /* Keep max height */
+            }
+            .items {
+                font-size: 15vw; /* Adjust font size based on viewport */
+                max-font-size: 50px; /* Keep max font size */
+            }
+            .btn {
+                width: 80px; /* Adjust button size */
+                height: 40px;
+                font-size: 20px;
+            }
+            #btnx {
+                margin-right: 10px; /* Adjust margin */
+            }
+            #won {
+                font-size: 24px; /* Adjust font size */
+            }
+            .play {
+                width: 140px; /* Adjust button size */
+                height: 40px;
+                font-size: 20px;
+            }
+            .play:hover {
+                width: 160px; /* Adjust hover size */
             }
         }
     </style>
 </head>
 <body>
-<div>
+<div class="btn-container"> <!-- Wrapped buttons in a container -->
     <button class="btn" id="btnx">X</button>
     <button class="btn" id="btno">O</button>
 </div>
     <div id="grid">
-         <div class="items" id="item1"></div>
-         <div class="items" id="item2"></div>
-         <div class="items" id="item3"></div>
-         <div class="items" id="item4"></div>
-         <div class="items" id="item5"></div>
-         <div class="items" id="item6"></div>
-         <div class="items" id="item7"></div>
-         <div class="items" id="item8"></div>
-         <div class="items" id="item9"></div>
+         <div class="items" id="item1" data-cell-index="0"></div>
+         <div class="items" id="item2" data-cell-index="1"></div>
+         <div class="items" id="item3" data-cell-index="2"></div>
+         <div class="items" id="item4" data-cell-index="3"></div>
+         <div class="items" id="item5" data-cell-index="4"></div>
+         <div class="items" id="item6" data-cell-index="5"></div>
+         <div class="items" id="item7" data-cell-index="6"></div>
+         <div class="items" id="item8" data-cell-index="7"></div>
+         <div class="items" id="item9" data-cell-index="8"></div>
     </div>
-    <p style="font-size: 30px;" id="won"></p>
-    <button class="play">Play Again</button>
+    <div class="game-status"> <!-- Wrapped status and play again in a container -->
+        <p id="won"></p> <!-- Removed inline style -->
+        <button class="play">Play Again</button>
+    </div>
 </body>
 <script src="script.js"></script>
 </html>
+```
