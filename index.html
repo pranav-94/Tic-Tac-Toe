@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,25 +10,28 @@
         *{
             margin: 0;
             padding: 0;
+            box-sizing: border-box; /* Added for better box model handling */
         }
         body{
             width: 100%;
-            height: 550px;
+            min-height: 100vh; /* Changed height to min-height for better responsiveness */
             display: flex;
             flex-direction: column;
-            /* justify-content: center; */
+            /* justify-content: center; */ /* Commented out in original, keeping as is */
             align-items: center;
             flex-wrap: wrap;
-            background-color: #1e293b; 
+            background-color: #1e293b;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding-top: 20px; /* Added some padding to the top */
         }
         #grid{
             width: 300px;
             height: 300px;
             display: grid;
-            grid-template-rows: 100px 100px 100px;
-            grid-template-columns: 100px 100px 100px;
-            
+            grid-template-rows: repeat(3, 1fr); /* Use repeat and 1fr for flexibility */
+            grid-template-columns: repeat(3, 1fr); /* Use repeat and 1fr for flexibility */
+            margin-top: 20px; /* Added margin-top */
+            margin-bottom: 20px; /* Added margin-bottom */
         }
         .items{
            border: 2px solid #cbdaf1;
@@ -38,10 +42,12 @@
             font-size: 50px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color: white;
-            transition: all;
-            transition-duration: 0.4s;
-            transition-timing-function: ease-in-out;
+            transition: all 0.4s ease-in-out; /* Combined transition properties */
         }
+        /* Simplified border removal using nth-child or grid properties is possible,
+           but keeping original ID-based approach as it was present.
+           A more robust CSS approach would be better but outside the scope
+           of improving HTML logic. */
         #item1,#item2,#item3{
             border-top: none;
         }
@@ -67,11 +73,10 @@
             border: none;
             font-size: 25px;
             color: white;
-            transition: all;
-            transition-timing-function: ease-in-out;
-            transition-duration: 0.2s;
+            transition: all 0.2s ease-in-out; /* Combined transition properties */
             border : 2px solid #e2e8f0;
             border-radius: 8px;
+            cursor: pointer; /* Added cursor pointer */
         }
         #btnx{
             margin-right: 20px;
@@ -84,11 +89,13 @@
             margin-top: 20px;
             width: 160px;
             height: 45px;
-            display: none;
+            display: none; /* Initially hidden */
             cursor: pointer;
-            transition: all;
-            transition-duration: 0.3s;
-            transition-timing-function: ease-in-out;
+            transition: all 0.3s ease-in-out; /* Combined transition properties */
+            background-color: #e2e8f0; /* Added background */
+            color: #1e293b; /* Added text color */
+            border: none; /* Added border none */
+            border-radius: 8px; /* Added border radius */
         }
         .play:hover{
             width: 200px;
@@ -96,17 +103,26 @@
         #won{
             margin-top: 20px;
             color: #ffffff;
+            text-align: center; /* Added text-align */
         }
          @media all and (max-width: 600px){
             body{
-                width: 100%;
-                height: 1000px;
-                display: flex;
-                align-items: center;
+                /* width: 100%; */ /* Already 100% */
+                /* height: 1000px; */ /* min-height handles this better */
+                /* display: flex; */ /* Already flex */
+                /* align-items: center; */ /* Already centered */
+                padding-top: 10px; /* Adjust padding for smaller screens */
             }
             #grid{
                 margin-top: 20px;
                 margin-bottom: 30px;
+            }
+            .btn{
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            .play{
+                margin-top: 10px;
             }
         }
     </style>
@@ -117,18 +133,20 @@
     <button class="btn" id="btno">O</button>
 </div>
     <div id="grid">
-         <div class="items" id="item1"></div>
-         <div class="items" id="item2"></div>
-         <div class="items" id="item3"></div>
-         <div class="items" id="item4"></div>
-         <div class="items" id="item5"></div>
-         <div class="items" id="item6"></div>
-         <div class="items" id="item7"></div>
-         <div class="items" id="item8"></div>
-         <div class="items" id="item9"></div>
+         <!-- Added data-cell-index attributes to facilitate JavaScript logic -->
+         <div class="items" id="item1" data-cell-index="0"></div>
+         <div class="items" id="item2" data-cell-index="1"></div>
+         <div class="items" id="item3" data-cell-index="2"></div>
+         <div class="items" id="item4" data-cell-index="3"></div>
+         <div class="items" id="item5" data-cell-index="4"></div>
+         <div class="items" id="item6" data-cell-index="5"></div>
+         <div class="items" id="item7" data-cell-index="6"></div>
+         <div class="items" id="item8" data-cell-index="7"></div>
+         <div class="items" id="item9" data-cell-index="8"></div>
     </div>
     <p style="font-size: 30px;" id="won"></p>
     <button class="play">Play Again</button>
 </body>
 <script src="script.js"></script>
 </html>
+```
