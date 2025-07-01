@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,28 +10,30 @@
         *{
             margin: 0;
             padding: 0;
+            box-sizing: border-box; /* Added for better box model handling */
         }
         body{
             width: 100%;
-            height: 550px;
+            min-height: 100vh; /* Use min-height for better responsiveness */
             display: flex;
             flex-direction: column;
-            /* justify-content: center; */
             align-items: center;
-            flex-wrap: wrap;
-            background-color: #1e293b; 
+            justify-content: center; /* Center content vertically */
+            background-color: #1e293b;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            padding: 20px; /* Add some padding */
         }
         #grid{
             width: 300px;
             height: 300px;
             display: grid;
-            grid-template-rows: 100px 100px 100px;
-            grid-template-columns: 100px 100px 100px;
-            
+            grid-template-rows: repeat(3, 1fr); /* Use repeat and fr for flexible sizing */
+            grid-template-columns: repeat(3, 1fr); /* Use repeat and fr for flexible sizing */
+            margin-top: 20px; /* Add margin */
+            margin-bottom: 20px; /* Add margin */
         }
         .items{
-           border: 2px solid #cbdaf1;
+            border: 2px solid #cbdaf1;
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -38,40 +41,32 @@
             font-size: 50px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
             color: white;
-            transition: all;
-            transition-duration: 0.4s;
-            transition-timing-function: ease-in-out;
+            transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out; /* Specify properties for transition */
         }
-        #item1,#item2,#item3{
-            border-top: none;
-        }
-        #item1,#item4,#item7{
-            border-left: none;
-        }
-        #item3,#item6,#item9{
-            border-right: none;
-        }
-        #item7,#item8,#item9{
-            border-bottom: none;
-        }
+        /* Use nth-child for border styling based on grid position */
+        #grid .items:nth-child(-n+3) { border-top: none; } /* First row */
+        #grid .items:nth-child(3n+1) { border-left: none; } /* First column */
+        #grid .items:nth-child(3n+3) { border-right: none; } /* Third column */
+        #grid .items:nth-child(n+7) { border-bottom: none; } /* Third row */
+
         .items:hover{
             background-color: #cbdaf1;
             color: #1e293b;
         }
+        .btn-container { /* Wrap buttons in a container */
+            margin-bottom: 20px;
+        }
         .btn{
-            margin-top: 30px;
-            margin-bottom: 30px;
             width: 100px;
             height: 50px;
             background-color: transparent;
             border: none;
             font-size: 25px;
             color: white;
-            transition: all;
-            transition-timing-function: ease-in-out;
-            transition-duration: 0.2s;
+            transition: all 0.2s ease-in-out; /* Specify properties for transition */
             border : 2px solid #e2e8f0;
             border-radius: 8px;
+            cursor: pointer; /* Add cursor pointer */
         }
         #btnx{
             margin-right: 20px;
@@ -84,11 +79,13 @@
             margin-top: 20px;
             width: 160px;
             height: 45px;
-            display: none;
+            display: none; /* Initially hidden */
             cursor: pointer;
-            transition: all;
-            transition-duration: 0.3s;
-            transition-timing-function: ease-in-out;
+            transition: width 0.3s ease-in-out; /* Specify property for transition */
+            border: 2px solid #e2e8f0; /* Add border for consistency */
+            background-color: transparent; /* Ensure transparent background */
+            color: white; /* Ensure white text */
+            border-radius: 8px; /* Add border radius */
         }
         .play:hover{
             width: 200px;
@@ -96,39 +93,68 @@
         #won{
             margin-top: 20px;
             color: #ffffff;
+            font-size: 30px; /* Moved font-size from inline style */
+            text-align: center; /* Center text */
         }
          @media all and (max-width: 600px){
             body{
-                width: 100%;
-                height: 1000px;
-                display: flex;
-                align-items: center;
+                min-height: 100vh; /* Keep min-height */
+                padding: 10px; /* Adjust padding */
             }
             #grid{
+                width: 90vw; /* Use relative units */
+                height: 90vw; /* Use relative units */
+                max-width: 300px; /* Set max width */
+                max-height: 300px; /* Set max height */
                 margin-top: 20px;
-                margin-bottom: 30px;
+                margin-bottom: 20px;
+            }
+            .items {
+                font-size: 15vw; /* Adjust font size based on viewport width */
+                max-font-size: 50px; /* Set max font size */
+            }
+            .btn {
+                width: 80px; /* Adjust button size */
+                height: 40px;
+                font-size: 20px;
+            }
+            #btnx {
+                margin-right: 10px; /* Adjust margin */
+            }
+            .play {
+                width: 140px; /* Adjust play button size */
+                height: 40px;
+                font-size: 20px;
+            }
+            .play:hover {
+                width: 160px; /* Adjust hover size */
+            }
+            #won {
+                font-size: 24px; /* Adjust font size */
             }
         }
     </style>
 </head>
 <body>
-<div>
+<div class="btn-container">
     <button class="btn" id="btnx">X</button>
     <button class="btn" id="btno">O</button>
 </div>
     <div id="grid">
-         <div class="items" id="item1"></div>
-         <div class="items" id="item2"></div>
-         <div class="items" id="item3"></div>
-         <div class="items" id="item4"></div>
-         <div class="items" id="item5"></div>
-         <div class="items" id="item6"></div>
-         <div class="items" id="item7"></div>
-         <div class="items" id="item8"></div>
-         <div class="items" id="item9"></div>
+         <!-- Using data-index for easier mapping to array in JS -->
+         <div class="items" data-index="0"></div>
+         <div class="items" data-index="1"></div>
+         <div class="items" data-index="2"></div>
+         <div class="items" data-index="3"></div>
+         <div class="items" data-index="4"></div>
+         <div class="items" data-index="5"></div>
+         <div class="items" data-index="6"></div>
+         <div class="items" data-index="7"></div>
+         <div class="items" data-index="8"></div>
     </div>
-    <p style="font-size: 30px;" id="won"></p>
+    <p id="won"></p>
     <button class="play">Play Again</button>
 </body>
 <script src="script.js"></script>
 </html>
+```
