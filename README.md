@@ -1,19 +1,47 @@
-# Tic Tac Toe Game
+# nodejs-api
 
-This is a simple implementation of the classic Tic Tac Toe game in JavaScript. You can play against another player.
+A simple Node.js API project.
 
-## Table of Contents
+## Project Structure
 
-- [Demo](#demo)
-- [Features](#features)
+```
+.gitignore
+package.json
+README.md
+src/
+├── index.js
+├── controllers/
+│   └── sampleController.js
+├── middleware/
+│   └── errorHandler.js
+└── routes/
+    └── index.js
+```
 
-## Demo
+## Setup
 
-You can try out the game online here  https://pranav-94.github.io/Tic-Tac-Toe/ .
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository_url>
+    cd nodejs-api
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-## Features
+## Running the API
 
-- Simple and intuitive user interface.
-- Responsive design for mobile and desktop.
-- Prevents invalid moves.
+```bash
+npm start
+```
 
+The API will start on port 3000 (or the port specified in `src/index.js`).
+
+## API Endpoints
+
+*   `GET /api/sample` - Returns a sample JSON response.
+
+## Error Handling
+
+Basic error handling middleware is included to catch errors and return a JSON response with status code and message.
