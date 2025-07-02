@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,7 @@
             /* justify-content: center; */
             align-items: center;
             flex-wrap: wrap;
-            background-color: #1e293b; 
+            background-color: #1e293b;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
         #grid{
@@ -27,7 +28,7 @@
             display: grid;
             grid-template-rows: 100px 100px 100px;
             grid-template-columns: 100px 100px 100px;
-            
+
         }
         .items{
            border: 2px solid #cbdaf1;
@@ -96,6 +97,12 @@
         #won{
             margin-top: 20px;
             color: #ffffff;
+            font-size: 30px;
+        }
+        #player-turn {
+            margin-top: 20px;
+            color: #ffffff;
+            font-size: 24px;
         }
          @media all and (max-width: 600px){
             body{
@@ -116,6 +123,7 @@
     <button class="btn" id="btnx">X</button>
     <button class="btn" id="btno">O</button>
 </div>
+<p id="player-turn">Select a player to start</p>
     <div id="grid">
          <div class="items" id="item1"></div>
          <div class="items" id="item2"></div>
@@ -127,8 +135,9 @@
          <div class="items" id="item8"></div>
          <div class="items" id="item9"></div>
     </div>
-    <p style="font-size: 30px;" id="won"></p>
+    <p id="won"></p>
     <button class="play">Play Again</button>
 </body>
 <script src="script.js"></script>
 </html>
+```
